@@ -26,8 +26,9 @@ app.get('/roll/:number', (req,res) => {
     res.send(`You rolled a ${roll}`)
 })
 
-// Exercise 2 URL test http://loclhost:3000/roll/20
-//  http://loclhost:3000/roll/potato
+// Exercise 2 URL test 
+// http://localhost:3000/roll/20
+// http://localhost:3000/roll/potato
 
 // Exrcise 3: I Want THAT One!
 
@@ -48,5 +49,48 @@ app.get('/roll/:number', (req,res) => {
     res.send( `So, you want the ${item.name}? For $${item.price}, it can be yours!`)
   })
 
-  // Exercise 3 URL test http://localhost:3000/collectibles/0
-  //  http://localhost:3000/collectibles/99
+  // Exercise 3 URL test 
+  // http://localhost:3000/collectibles/0
+  // http://localhost:3000/collectibles/99
+
+  // Exercise 4: Filter Shoes by Query Paramenters
+
+    const shoes = [
+      { name: "Birkenstocks", price: 50, type: "sandal" },
+      { name: "Air Jordans", price: 500, type: "sneaker" },
+      { name: "Air Mahomeses", price: 501, type: "sneaker" },
+      { name: "Utility Boots", price: 20, type: "boot" },
+      { name: "Velcro Sandals", price: 15, type: "sandal" },
+      { name: "Jet Boots", price: 1000, type: "boot" },
+      { name: "Fifty-Inch Heels", price: 175, type: "heel" }
+  ];
+
+  app.get('/shoes', (req, res) => {
+    let filteredShoes = shoes
+
+    if (req.query['min-price']) {
+        filteredShoes = filteredShoes.filter(
+            shoe => shoe.price >= Number(req.query['min-price'])
+        )
+    }
+
+    if (req.query['max-price']) {
+        filteredShoes = filteredShoes.filter(
+            shoe => shoe.price <= Number(req.query['max-price'])
+        )
+    }
+
+    if (req.query.type) {
+        filteredShoes = filteredShoes.filter(
+            shoe => shoe.type === req.query.type
+        )
+    }
+
+    res.send(filteredShoes)
+  })
+
+// Exercise 4 URL test
+// http://localhost:3000/shoes
+// http://localhost:3000/shoes?type=sneaker
+// http://localhost:3000/shoes?min-price=100
+// http://localhost:3000/shoes?min-price=100&max-price=600&type=sneaker
