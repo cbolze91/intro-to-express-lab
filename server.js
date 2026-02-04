@@ -1,9 +1,6 @@
 const express = require('express')
 const app = express()
 
-app.listen(3000, () => {
-    console.log('Listening on port 3000')
-})
 
 // Exercise 1: Be Polite, Greet the User
 
@@ -94,3 +91,8 @@ app.get('/roll/:number', (req,res) => {
 // http://localhost:3000/shoes?type=sneaker
 // http://localhost:3000/shoes?min-price=100
 // http://localhost:3000/shoes?min-price=100&max-price=600&type=sneaker
+
+
+app.listen(3000, () => {
+    console.log('Listening on port 3000')
+})
